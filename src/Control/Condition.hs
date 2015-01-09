@@ -19,7 +19,7 @@ type Handlers = (?handlers :: [ConditionHandler])
 data ConditionHandler where
   ConditionHandler :: Condition c r => (c -> r) -> ConditionHandler
 
--- | A condition must have a label type
+-- | A condition must have a label type @c@ which has a return value of type @r@.
 class (Exception c) => Condition c r | c -> r
 
 -- | Signal a condition.
