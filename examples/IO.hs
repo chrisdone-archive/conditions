@@ -43,3 +43,9 @@ example =
                                then openFile fp mode
                                else signal c)
                       (openFile "/foo/bar" ReadMode)))
+
+-- | Main entry point.
+main :: IO ()
+main =
+  do h <- example
+     print h

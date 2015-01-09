@@ -34,8 +34,8 @@ signal c = go ?handlers
 -- | Handle the given condition.
 handler :: (Handlers,Condition c r)
         => (Handlers => c -> r) -- ^ Condition handler.
-        -> (Handlers => r)      -- ^ Scope of the condition handler.
-        -> r
+        -> (Handlers => x)      -- ^ Scope of the condition handler.
+        -> x
 handler h r =
   let ?handlers = ConditionHandler h : old
   in r
