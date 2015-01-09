@@ -74,3 +74,5 @@ example =
                                else signal c)
                       (openFile "/foo/bar" ReadMode)))
 ```
+
+See the `examples/` directory for more examples.
