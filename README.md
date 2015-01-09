@@ -56,7 +56,7 @@ openFile fp mode =
        Right h -> return h
 ```
 
-Now you can handle signals with `handler`, for example:
+Now you can handle signals with `handler`:
 
 ``` haskell
 example :: IO Handle
