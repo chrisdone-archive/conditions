@@ -3,7 +3,7 @@ conditions
 
 Conditions for Haskell.
 
-In this library, a condition does not uwnind the call stack, instead
+In this library, a condition does not unwind the call stack, instead
 it makes a non-local transfer of control to the condition handler
 which can permit the handler to continue the computation with
 different conditions, retry, signal a new condition, or abort with an
