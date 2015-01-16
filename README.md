@@ -11,6 +11,10 @@ exception.
 
 [Haddocks](http://chrisdone.com/conditions/Control-Condition.html)
 
+See the `examples/` directory for examples.
+
+### Explanation
+
 A condition must be an instance of the `Condition` class:
 
 ``` haskell
@@ -34,47 +38,3 @@ handler :: (Handlers,Condition c r)
 ```
 
 In the absence of any handlers, a signal is thrown as an exception.
-
-## Examples
-
-An IO example condition:
-
-``` haskell
-data OpenFileCondition = OpenFileCondition FilePath IOMode
-  deriving (Typeable,Show)
-instance Exception OpenFileCondition
-instance Condition OpenFileCondition (IO Handle)
-```
-
-Later you can implement an `openFile` function which signals a
-condition, for example:
-
-``` haskell
-openFile :: Handlers => FilePath -> IOMode -> IO Handle
-openFile fp mode =
-  do result <- try (IO.openFile fp mode)
-     case result of
-       Left (_ :: IOException) -> signal (OpenFileCondition fp mode)
-       Right h -> return h
-```
-
-Now you can handle signals with `handler`:
-
-``` haskell
-example :: IO Handle
-example =
-  withConditions
-    (handler (\(OpenFileCondition _ mode) ->
-                do putStrLn "Oh noes. How about a different file:"
-                   fp <- getLine
-                   openFile fp mode)
-             (handler (\c@(OpenFileCondition fp mode) ->
-                         do putStrLn "Oops, problem opening file. Retry once more?"
-                            y <- getLine
-                            if y == "y"
-                               then openFile fp mode
-                               else signal c)
-                      (openFile "/foo/bar" ReadMode)))
-```
-
-See the `examples/` directory for more examples.
