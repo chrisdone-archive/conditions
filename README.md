@@ -9,6 +9,8 @@ which can permit the handler to continue the computation with
 different conditions, retry, signal a new condition, or abort with an
 exception.
 
+[Haddocks](http://chrisdone.com/conditions/Control-Condition.html)
+
 A condition must be an instance of the `Condition` class:
 
 ``` haskell
