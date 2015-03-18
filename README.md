@@ -3,17 +3,30 @@ conditions
 
 Conditions for Haskell.
 
+[Haddocks](http://chrisdone.com/conditions/Control-Condition.html)
+
 In this library, a condition does not unwind the call stack, instead
 it makes a non-local transfer of control to the condition handler
 which can permit the handler to continue the computation with
 different conditions, retry, signal a new condition, or abort with an
 exception.
 
-[Haddocks](http://chrisdone.com/conditions/Control-Condition.html)
+In languages with comprehensive condition systems like Common Lisp, it
+is possible for the development environment to reify conditions into
+something meaningful to allow the programmer to take some corrective
+action without bailing out the whole program. Examples:
 
-See the `examples/` directory for examples.
+* In the case of failing to open a file during a long-running
+  computation, the IDE can prompt the developer to provide another
+  file name, retry, abort, etc.
+* Parsing a CSV and encountering a line that does not parse can allow
+  the developer to attempt to re-parse, change the parsing function on
+  the fly to suite new discovered requirements or substitute a value
+  to be used for that row, or ignore it.
 
-### Explanation
+See the `examples/` directory for code versions of these examples.
+
+### API overview
 
 A condition must be an instance of the `Condition` class:
 
