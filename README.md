@@ -11,6 +11,8 @@ which can permit the handler to continue the computation with
 different conditions, retry, signal a new condition, or abort with an
 exception.
 
+### Motivation
+
 In languages with comprehensive condition systems like Common Lisp, it
 is possible for the development environment to reify conditions into
 something meaningful to allow the programmer to take some corrective
@@ -26,7 +28,7 @@ action without bailing out the whole program. Examples:
 
 See the `examples/` directory for code versions of these examples.
 
-### API overview
+### Library
 
 A condition must be an instance of the `Condition` class:
 
